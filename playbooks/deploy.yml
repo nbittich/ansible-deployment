@@ -1,0 +1,26 @@
+- name: Deploy docker project
+  gather_facts: False
+  hosts: cloud
+  become: True
+  vars:
+    destination_path: '{{ lookup("env", "DEPLOY_PATH") }}'
+    github_url: '{{ lookup("env", "GITHUB_URL")}}'
+    deploy_version: '{{ lookup("env", "DEPLOY_VERSION")}}'
+    tasks:
+    - name: Ensure the destination directory exists
+      file:
+        path: "{{ destination_path }}"
+        state: directory
+        mode: "0755"
+    - name: Clone the GitHub repository
+      git:
+        repo: '{{ github_url }}'
+        dest: "{{ destination_path }}"
+        update: yes
+        version: '{{ deploy_version }}'
+    - name: Run docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+      command:
+        cmd:  docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+        chdir: "{{ destination_path }}"
+      register: docker_compose_output
+

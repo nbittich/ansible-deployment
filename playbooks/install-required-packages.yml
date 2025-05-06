@@ -1,0 +1,17 @@
+- name: Install Git on Ubuntu/Debian
+  hosts: cloud
+  become: True
+  tasks:
+    - name: Ensure Git is installed
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - git
+          - virtualenv
+          - python3-setuptools
+        update_cache: yes
+        state: latest

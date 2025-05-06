@@ -1,0 +1,9 @@
+- name: Install Python
+  gather_facts: False
+  hosts: cloud
+  become: True
+  tasks:
+    - name: Install Python using raw module
+      raw: |
+        apt-get update
+        apt-get install -y python3
