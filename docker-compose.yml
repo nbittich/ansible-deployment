@@ -4,7 +4,7 @@ services:
     environment:
       - "ANSIBLE_HOST_KEY_CHECKING=False"
       - "ANSIBLE_CONFIG=/etc/ansible/ansible.cfg"
-      - "GITHUB_URL=https://github.com/nbittich/swarm.git"
+      - "GITHUB_URL=https://github.com/nbittich/app-swarm.git"
       - "DEPLOY_VERSION=0.2.0"
       - "DEPLOY_PATH=/data/swarm"
     volumes:
@@ -12,5 +12,6 @@ services:
       - ./playbooks:/apps
       - ./ansible.cfg:/etc/ansible/ansible.cfg
       - ./inventory:/inventory
+      - ./sdata:/sdata
     working_dir: /apps
     entrypoint: ["tail", "-f", "/dev/null"]

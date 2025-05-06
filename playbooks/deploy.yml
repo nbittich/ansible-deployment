@@ -6,7 +6,7 @@
     destination_path: '{{ lookup("env", "DEPLOY_PATH") }}'
     github_url: '{{ lookup("env", "GITHUB_URL")}}'
     deploy_version: '{{ lookup("env", "DEPLOY_VERSION")}}'
-    tasks:
+  tasks:
     - name: Ensure the destination directory exists
       file:
         path: "{{ destination_path }}"
@@ -18,9 +18,18 @@
         dest: "{{ destination_path }}"
         update: yes
         version: '{{ deploy_version }}'
-    - name: Run docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+    - name: Copy env files
+      copy:
+         src: /sdata/secrets
+         dest: '{{ destination_path }}'
+         mode: '0755'
+    - name: Copy docker-compose.override.yml
+      copy:
+         src: /sdata/docker-compose.override.yml
+         dest: '{{ destination_path }}/docker-compose.override.yml'
+         mode: '0755'
+    - name: Run docker compose up -d
       command:
-        cmd:  docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+        cmd:  docker compose up -d
         chdir: "{{ destination_path }}"
-      register: docker_compose_output
 

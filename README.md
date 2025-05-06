@@ -18,4 +18,6 @@ services:
 
 ```
 
-- run  `bash deploy.sh <SERVER_IP_ADDRESS>`
+- add your secret `env_file` into the `./sdata/secrets` folder. They will be accessible in `$DEPLOY_PATH/secrets`
+- add your `docker-compose.override.yml` for your app to `./sdata`.
+- run  `bash deploy.sh <SERVER_IP_ADDRESS> <USER>`

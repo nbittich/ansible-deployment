@@ -1,3 +1,4 @@
 /ssh_keys/
+/sdata/secrets/
 docker-compose.override.yml
 /playbooks/inventory.ini
