@@ -28,8 +28,14 @@
          src: /sdata/docker-compose.override.yml
          dest: '{{ destination_path }}/docker-compose.override.yml'
          mode: '0755'
+    - name: Down the stack
+      command:
+        cmd: docker compose down
+        chdir: "{{ destination_path }}"
+      changed_when: true
     - name: Run docker compose up -d
       command:
         cmd:  docker compose up -d
         chdir: "{{ destination_path }}"
+      changed_when: true
 
