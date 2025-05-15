@@ -5,7 +5,7 @@ services:
       - "ANSIBLE_HOST_KEY_CHECKING=False"
       - "ANSIBLE_CONFIG=/etc/ansible/ansible.cfg"
       - "GITHUB_URL=https://github.com/nbittich/app-swarm.git"
-      - "DEPLOY_VERSION=0.2.1"
+      - "DEPLOY_VERSION=0.4.0"
       - "DEPLOY_PATH=/data/swarm"
     volumes:
       - ./ssh_keys:/root/.ssh
